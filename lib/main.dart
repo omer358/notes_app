@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "My app",
-      theme: ThemeData.dark(),
       home: Scaffold(
           appBar: AppBar(
             title: const Text("Home"),
