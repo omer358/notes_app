@@ -33,9 +33,7 @@ class _NotesPageState extends State<NotesPage> {
       body: FutureBuilder<List<Note>>(
         future: futureNote,
         builder: (context, snapshot) {
-          log("what is going on here!");
           if (snapshot.hasData) {
-            log("The snapshot has some data and the condition has been aprooved!");
             return GridView.builder(
               itemCount: snapshot.data!.length,
               clipBehavior: Clip.antiAlias,
@@ -43,14 +41,12 @@ class _NotesPageState extends State<NotesPage> {
               const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
               itemBuilder: (BuildContext context, int index) {
-                log("item builder is working");
                 return noteCard( (){
-                  log("the notecard is returned");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context)=>
-                              NotePage(data: snapshot.data![index])));
+                              NoteEditorScreen(note: snapshot.data![index], )));
                 },
                     snapshot.data![index]);
               });
@@ -65,7 +61,7 @@ class _NotesPageState extends State<NotesPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const NoteEditorScreen()));
+              builder: (context) =>   NoteEditorScreen(note: Note("","","","",0),)));
           },
           label: const Text("create"),
       icon: const Icon(Icons.add),),
