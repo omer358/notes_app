@@ -1,34 +1,33 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:notes_app/controllers/note_editor_controller.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/services/database_helper.dart';
 import 'package:notes_app/style/app_style.dart';
 
-class NoteEditorScreen extends StatelessWidget {
-  final Note? note;
-  NoteEditorScreen({super.key, this.note});
+import '../controllers/notes_controller.dart';
 
-  int color_id = Random().nextInt(AppStyle.cardColor.length);
-
-  final TextEditingController _titleController = TextEditingController();
-
-  final TextEditingController _mainController = TextEditingController();
+class NoteEditorScreen extends StatelessWidget{
+  NoteEditorScreen({super.key});
+  final NoteEditorController noteEditorController = Get.put(NoteEditorController());
+  final notesController = Get.find<NotesController>();
 
   @override
   Widget build(BuildContext context) {
-    if (note != null) {
-      _titleController.text = note!.title;
-      _mainController.text = note!.content;
-    }
+    final int i = ModalRoute.of(context)!.settings.arguments as int;
+    print("the index value is $i");
+    final note = notesController.notesList![i];
+    noteEditorController.titleController.text = note.title;
+    noteEditorController.contentController.text = note.content;
     return Scaffold(
-      backgroundColor: AppStyle.cardColor[color_id],
+      backgroundColor: AppStyle.cardColor[note.color],
       appBar: AppBar(
-        backgroundColor: AppStyle.cardColor[color_id],
+        backgroundColor: AppStyle.cardColor[note.color],
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0.0,
-        title: Text(
-          note == null ? "Add a new Note" : "Edit note",
+        title: Text("Edit note",
           style: const TextStyle(color: Colors.black),
         ),
       ),
@@ -38,7 +37,7 @@ class NoteEditorScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              controller: _titleController,
+              controller: noteEditorController.titleController,
               textCapitalization: TextCapitalization.words,
               decoration: const InputDecoration(
                 border: InputBorder.none,
@@ -48,7 +47,7 @@ class NoteEditorScreen extends StatelessWidget {
             ),
             const SizedBox(height: 28.0),
             TextField(
-              controller: _mainController,
+              controller: noteEditorController.contentController,
               textCapitalization: TextCapitalization.sentences,
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -63,23 +62,8 @@ class NoteEditorScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: AppStyle.accentColor,
-          onPressed: () async {
-            final title = _titleController.value.text;
-            final content = _mainController.value.text;
-
-            if (title.isEmpty || content.isEmpty) {
-              return;
-            }
-
-            final Note model = Note(
-                title: title, content: content, id: note?.id, color: color_id);
-            if (note == null) {
-              await DatabaseHelper.addNote(model);
-            } else {
-              await DatabaseHelper.updateNote(model);
-            }
-
-            Navigator.of(context).pop();
+          onPressed: ()  {
+            noteEditorController.addNoteToDatabase();
           },
           label: Text(note == null ? "Add" : "Edit"),
           icon: Icon(note == null ? Icons.add : Icons.edit)),

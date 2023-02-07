@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:notes_app/screens/home_screen.dart';
 
 void main(List<String> args) {
@@ -10,14 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: "My app",
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Home"),
-          ),
-          body: const NotesPage()
-      ),
+      home:  NotesPage()
     );
   }
 }

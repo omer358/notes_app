@@ -5,7 +5,8 @@ class Note {
   final int color;
 
   const Note(
-      {required this.title,
+      {required
+      this.title,
       required this.content,
       required this.color,
       this.id});
