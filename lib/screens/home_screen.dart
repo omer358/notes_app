@@ -17,17 +17,16 @@ class NotesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notes"),
+        title: const Text("Notes"),
       ),
-      body: GetX<NotesController>(builder: (controller) {
-        return ListView.builder(
-            itemCount: controller.notesList?.length,
+      body: Obx( () => ListView.builder(
+            itemCount: noteController.notesList.value.length,
             itemBuilder: (context, index) => NoteCard(
-                  note: controller.notesList![index],
-                  onTap: () {
+                  note: noteController.notesList.value[index],
+                  onTap: () async{
                     Get.to(
                         NoteEditorScreen(),
-                        arguments: controller.notesList![index]);
+                        arguments: noteController.notesList.value[index]);
                   },
                   onLongPress: () async {
                     showDialog(
@@ -38,24 +37,25 @@ class NotesPage extends StatelessWidget {
                                 'Are you sure you want to delete this note?'),
                             actions: [
                               ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.red)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  noteController.deleteNote(noteController.notesList.value[index].id);
+                                  },
                                 child: const Text('Yes'),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.back();
+                                },
                                 child: const Text('No'),
                               ),
                             ],
                           );
                         });
                   },
-                ));
-      }),
+                )),
+      ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
+        onPressed: () async{
           Get.to(NoteEditorScreen());
         },
         label: const Text("create"),

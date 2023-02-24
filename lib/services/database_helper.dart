@@ -27,22 +27,22 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  static Future<int> deleteNote(Note note) async {
+  static Future<int> deleteNote(int noteId) async {
     final db = await _getDB();
     return await db.delete(
       "Note",
       where: 'id = ?',
-      whereArgs: [note.id],
+      whereArgs: [noteId],
     );
   }
 
-  static Future<List<Note>?> getAllNotes() async {
-    final db = await _getDB();
+  static Future<List<Note>> getAllNotes() async {
+    final db =   await _getDB();
 
     final List<Map<String, dynamic>> maps = await db.query("Note");
 
     if (maps.isEmpty) {
-      return null;
+      return [];
     }
 
     return List.generate(maps.length, (index) => Note.fromJson(maps[index]));
