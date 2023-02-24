@@ -17,9 +17,11 @@ class NotesPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Obx( () => ListView.builder(
-              itemCount: noteController.notesList.value.length,
-              itemBuilder: (context, index) => NoteCard(
+        child: Obx( () => GridView.builder(
+            gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 300,),
+            itemCount: noteController.notesList.value.length,
+            itemBuilder: (context, index) => NoteCard(
                     note: noteController.notesList.value[index],
                     onTap: () async{
                       Get.to(
