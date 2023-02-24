@@ -18,7 +18,7 @@ class NotesPage extends StatelessWidget {
       ),
       body: Obx(
         () => noteController.isEmpty()
-            ? const EmptyState()
+            ? const Center(child: EmptyState())
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Obx(
