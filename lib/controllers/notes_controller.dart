@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/models/note_model.dart';
@@ -12,6 +14,16 @@ class NotesController extends GetxController{
   void onInit() {
     super.onInit();
     getAllNotes();
+  }
+
+  bool isEmpty() {
+    if (notesList.value.isEmpty) {
+      log("is Empty!");
+      return true;
+    } else {
+      log("is not Empty!");
+      return false;
+    }
   }
 
   Future getAllNotes() async{
