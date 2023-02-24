@@ -9,7 +9,7 @@ class DatabaseHelper {
   static Future<Database> _getDB() async {
     return openDatabase(join(await getDatabasesPath(), _dbName),
         onCreate: (db, version) async => await db.execute(
-            "CREATE TABLE Note(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL, color INTEGER NOT NULL);"),
+            "CREATE TABLE Note(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL);"),
         version: _version);
   }
 

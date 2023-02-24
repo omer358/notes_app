@@ -17,30 +17,28 @@ class NoteCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       onLongPress: onLongPress,
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        margin: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: AppStyle.cardColor[note.color],
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              note.title,
-              style: AppStyle.mainTitle,
-            ),
-            const SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 8),
-              child: Text(
-                note.content,
-                style: AppStyle.mainContent,
-                overflow: TextOverflow.ellipsis,
+      child: Card(
+        elevation: 2.0,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                note.title,
+                style: AppStyle.mainTitle,
               ),
-            ),
-          ],
+              const SizedBox(height: 16.0),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 8),
+                child: Text(
+                  note.content,
+                  style: AppStyle.mainContent,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

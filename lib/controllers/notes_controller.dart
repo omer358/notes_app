@@ -1,19 +1,12 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/services/database_helper.dart';
-import 'package:sqflite/sqflite.dart';
-
-import '../style/app_style.dart';
 
 class NotesController extends GetxController{
   Rx<List<Note>> notesList = Rx<List<Note>>([]);
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  int color_id = Random().nextInt(AppStyle.cardColor.length);
 
   @override
   void onInit() {
@@ -30,7 +23,7 @@ class NotesController extends GetxController{
     String content = contentController.text;
     Note note = Note(
       title: title,
-      content: content, color: color_id,
+      content: content,
     );
     await DatabaseHelper.addNote(note);
     titleController.text = "";

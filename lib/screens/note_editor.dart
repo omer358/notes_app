@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/style/app_style.dart';
@@ -12,17 +10,9 @@ class NoteEditorScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    // final int i = ModalRoute.of(context)?.settings.arguments as int;
-    // print("the index value is $i");
-    // final note = notesController.notesList![i];
     return Scaffold(
-      backgroundColor: AppStyle.cardColor[notesController.color_id],
       appBar: AppBar(
-        backgroundColor: AppStyle.cardColor[notesController.color_id],
-        iconTheme: const IconThemeData(color: Colors.black),
-        elevation: 0.0,
         title: const Text("Edit note",
-          style:  TextStyle(color: Colors.black),
         ),
       ),
       body: Padding(
@@ -55,7 +45,6 @@ class NoteEditorScreen extends StatelessWidget{
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: AppStyle.accentColor,
           onPressed: ()  async{
             notesController.addNoteToDatabase();
           },
