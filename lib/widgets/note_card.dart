@@ -26,15 +26,18 @@ class NoteCard extends StatelessWidget {
             children: [
               Text(
                 note.title,
-                style: AppStyle.mainTitle,
+                style: AppStyle.mainTitle.copyWith(fontSize: 18),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 8.0),
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 8),
                 child: Text(
                   note.content,
-                  style: AppStyle.mainContent,
+                  style: AppStyle.mainContent.copyWith(fontSize: 14),
                   overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
                 ),
               ),
             ],
