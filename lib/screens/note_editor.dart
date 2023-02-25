@@ -16,8 +16,10 @@ class NoteEditorScreen extends StatelessWidget{
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 8, 4),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
@@ -29,7 +31,7 @@ class NoteEditorScreen extends StatelessWidget{
               ),
               style: AppStyle.mainTitle,
             ),
-            const SizedBox(height: 28.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: notesController.contentController,
               textCapitalization: TextCapitalization.sentences,
@@ -42,7 +44,7 @@ class NoteEditorScreen extends StatelessWidget{
               style: AppStyle.mainContent,
             ),
           ],
-        ),
+        ),),
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: ()  async{
