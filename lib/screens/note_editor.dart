@@ -12,7 +12,7 @@ class NoteEditorScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit note",
+        title: const Text("Create note",
         ),
       ),
       body: Padding(
