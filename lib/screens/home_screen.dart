@@ -3,7 +3,7 @@ import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/screens/empty_state_screen.dart';
 import 'package:notes_app/screens/note_viewer_screen.dart';
 import '../widgets/note_card.dart';
-import 'note_editor.dart';
+import 'new_note.dart';
 import 'package:get/get.dart';
 
 class NotesPage extends StatelessWidget {
@@ -68,7 +68,7 @@ class NotesPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          Get.to(NoteEditorScreen());
+          Get.to(CreateNewNote());
         },
         label: const Text("create"),
         icon: const Icon(Icons.add),

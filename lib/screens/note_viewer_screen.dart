@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:notes_app/style/app_style.dart';
 
 import '../controllers/notes_controller.dart';
 import '../models/note_model.dart';
+import 'note_editor.dart';
 
 class NoteViewer extends StatelessWidget {
   NoteViewer({super.key});
@@ -21,7 +20,11 @@ class NoteViewer extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Note Viewer"),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.edit)),
+          IconButton(
+              onPressed: (){
+                Get.to(()=> NoteEditor(), arguments: note);
+              },
+              icon: const Icon(Icons.edit)),
           IconButton(onPressed: (){
             showDialog(
               context: context,

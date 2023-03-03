@@ -3,16 +3,19 @@ import 'package:get/get.dart';
 import 'package:notes_app/style/app_style.dart';
 
 import '../controllers/notes_controller.dart';
+import '../models/note_model.dart';
 
-class NoteEditorScreen extends StatelessWidget{
-  NoteEditorScreen({super.key});
+class NoteEditor extends StatelessWidget{
+  NoteEditor({super.key});
   final notesController = Get.find<NotesController>();
-
   @override
   Widget build(BuildContext context) {
+    final Note note = Get.arguments;
+    notesController.titleController.text = note.title;
+    notesController.contentController.text = note.content;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create note",
+        title: const Text("Edit note",
         ),
       ),
       body: Padding(
@@ -20,38 +23,38 @@ class NoteEditorScreen extends StatelessWidget{
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: notesController.titleController,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: "Note Title",
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: notesController.titleController,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Note Title",
+                ),
+                style: AppStyle.mainTitle,
               ),
-              style: AppStyle.mainTitle,
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: notesController.contentController,
-              textCapitalization: TextCapitalization.sentences,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: "Note Content",
+              const SizedBox(height: 16.0),
+              TextField(
+                controller: notesController.contentController,
+                textCapitalization: TextCapitalization.sentences,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Note Content",
+                ),
+                style: AppStyle.mainContent,
               ),
-              style: AppStyle.mainContent,
-            ),
-          ],
-        ),),
+            ],
+          ),),
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: ()  async{
-            notesController.addNoteToDatabase();
+            notesController.updateNote(note.id);
           },
-          label: const Text("Add"),
-          icon: const Icon( Icons.add )),
+          label: const Text("Save"),
+          icon: const Icon( Icons.save )),
     );
   }
 }

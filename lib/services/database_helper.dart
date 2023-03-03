@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:notes_app/models/note_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  static const int _version = 1;
+  static const int _version = 2;
   static const String _dbName = "Notes.db";
 
   static Future<Database> _getDB() async {
@@ -21,6 +23,7 @@ class DatabaseHelper {
 
   static Future<int> updateNote(Note note) async {
     final db = await _getDB();
+    log(note.toString(),level: 3);
     return await db.update("Note", note.toJson(),
         where: 'id = ?',
         whereArgs: [note.id],
