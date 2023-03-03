@@ -34,15 +34,23 @@ class NotesController extends GetxController{
   void addNoteToDatabase() async {
     String title = titleController.text;
     String content = contentController.text;
-    Note note = Note(
-      title: title,
-      content: content,
-    );
-    await DatabaseHelper.addNote(note);
-    titleController.text = "";
-    contentController.text = "";
-    getAllNotes();
-    Get.back();
+    if (title.isNotEmpty || content.isNotEmpty) {
+      Note note = Note(
+        title: title,
+        content: content,
+      );
+      await DatabaseHelper.addNote(note);
+      titleController.text = "";
+      contentController.text = "";
+      getAllNotes();
+      Get.back();
+    }
+    else{
+      Get.snackbar(
+          "Unable to save",
+          "You can not Create an empty note!",
+      snackPosition: SnackPosition.BOTTOM);
+    }
   }
   void updateNote(int? id) async {
     String title = titleController.text;
@@ -52,8 +60,9 @@ class NotesController extends GetxController{
       title: title,
       content: content,
     );
-    var updatedNote = await DatabaseHelper.updateNote(note);
-    log("$updatedNote");
+    await DatabaseHelper.updateNote(note);
+    titleController.text = "";
+    contentController.text = "";
     getAllNotes();
     Get.offAll(()=>NotesPage());
   }
