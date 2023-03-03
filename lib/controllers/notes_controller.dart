@@ -31,9 +31,7 @@ class NotesController extends GetxController{
     notesList.value = await DatabaseHelper.getAllNotes();
   }
 
-  void addNoteToDatabase() async {
-    String title = titleController.text;
-    String content = contentController.text;
+  void addNoteToDatabase(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {
       Note note = Note(
         title: title,

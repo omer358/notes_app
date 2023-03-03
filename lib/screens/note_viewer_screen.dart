@@ -54,7 +54,7 @@ class NoteViewer extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 8, 4),
+        padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
         child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

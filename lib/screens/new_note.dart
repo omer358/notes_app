@@ -16,7 +16,7 @@ class CreateNewNote extends StatelessWidget{
         ),
       ),
       body: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 8, 4),
+        padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -48,7 +48,9 @@ class CreateNewNote extends StatelessWidget{
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: ()  async{
-            notesController.addNoteToDatabase();
+            String title = notesController.titleController.text;
+            String content = notesController.contentController.text;
+            notesController.addNoteToDatabase(title,content);
           },
           label: const Text("Add"),
           icon: const Icon( Icons.add )),
