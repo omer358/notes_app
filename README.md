@@ -7,6 +7,13 @@ Notes-taking app built with flutter.
 
 This project is using restfull APIs built with django, [notes-apis](https://github.com/omer358/Notes-APIs)
 
+## dependencies:
+* [Getx](https://chornthorn.github.io/getx-docs/) to manage states,navigation, translations, etc...
+* [flutter_lorem](https://pub.dev/packages/flutter_lorem), to quick generation of new titles and content for new notes.
+* [sqflite](https://pub.dev/packages/sqflite) to implement the local database.
+* [htpp](https://pub.dev/packages/lottie) to handle network requests.
+* [lottie](https://pub.dev/packages/lottie) to implement animated assets.
+
 ## Features:
 The curren version of the app support:
   * adding, editing, and deleting notes to and from the local database, the APIs is not yet attached to the app.
@@ -33,5 +40,4 @@ The curren version of the app support:
 | Edit Note Screen | Edit Note Dark Mode Screen| 
 |    :---:     |     :---:      |  
 | <img src="screenshots/note_editor.png" width="300">   | <img src="screenshots/note_editor_dm.png" width="300">   |
-
 
