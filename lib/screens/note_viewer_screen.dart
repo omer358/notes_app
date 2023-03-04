@@ -21,67 +21,67 @@ class NoteViewer extends StatelessWidget {
         title: Text("note_viewer".tr),
         actions: [
           IconButton(
-              onPressed: (){
-                Get.to(()=> NoteEditor(), arguments: note);
-              },
-              icon: const Icon(Icons.edit),
+            onPressed: () {
+              Get.to(() => NoteEditor(), arguments: note);
+            },
+            icon: const Icon(Icons.edit),
             tooltip: 'edit'.tr,
           ),
           IconButton(
-            onPressed: (){
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title:  Text(
-                      'delete_msg'.tr),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        noteController.deleteNote(note.id);
-                        Get.offAll(NotesPage());
-                      },
-                      child: Text('yes'.tr),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child:  Text('no'.tr),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('delete_msg'.tr),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          noteController.deleteNote(note.id);
+                          Get.offAll(NotesPage());
+                        },
+                        child: Text('yes'.tr),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text('no'.tr),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             icon: const Icon(Icons.delete),
-          tooltip: 'delete'.tr,)
+            tooltip: 'delete'.tr,
+          )
         ],
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
         child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SelectableText(
-              note.title,
-              style: AppStyle.mainTitle,
-            ),
-            const SizedBox(height: 8.0),
-            Text("Crated At: ${note.createdDate}"),
-            const SizedBox(height: 4.0),
-            Text("Last Update : ${note.updatedAt}"),
-            const SizedBox(height: 12.0),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 4),
-              child: SelectableText(
-                note.content,
-                style: AppStyle.mainContent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SelectableText(
+                note.title,
+                style: AppStyle.mainTitle,
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 8.0),
+              Text("Crated At: ${note.createdDate}"),
+              const SizedBox(height: 4.0),
+              Text("Last Update : ${note.updatedAt}"),
+              const SizedBox(height: 12.0),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 4),
+                child: SelectableText(
+                  note.content,
+                  style: AppStyle.mainContent,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

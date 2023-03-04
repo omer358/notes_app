@@ -5,7 +5,7 @@ import 'package:notes_app/style/app_style.dart';
 import '../controllers/notes_controller.dart';
 import '../models/note_model.dart';
 
-class NoteEditor extends StatelessWidget{
+class NoteEditor extends StatelessWidget {
   NoteEditor({super.key});
   final notesController = Get.find<NotesController>();
   @override
@@ -15,7 +15,8 @@ class NoteEditor extends StatelessWidget{
     notesController.contentController.text = note.content;
     return Scaffold(
       appBar: AppBar(
-        title:  Text("edit_note".tr,
+        title: Text(
+          "edit_note".tr,
         ),
       ),
       body: Padding(
@@ -50,14 +51,15 @@ class NoteEditor extends StatelessWidget{
                 ),
               ),
             ],
-          ),),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: ()  async{
+          onPressed: () async {
             notesController.updateNote(note);
           },
           label: Text("save".tr),
-          icon: const Icon( Icons.save )),
+          icon: const Icon(Icons.save)),
     );
   }
 }
