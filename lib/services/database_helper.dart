@@ -29,10 +29,12 @@ class DatabaseHelper {
   static Future<int> updateNote(Note note) async {
     final db = await _getDB();
     log(note.toString(),level: 3);
-    return await db.update("Note", note.toJson(),
+    int count = await db.update("Note", note.toJson(),
         where: 'id = ?',
         whereArgs: [note.id],
         conflictAlgorithm: ConflictAlgorithm.replace);
+    log("Updated fields: $count");
+    return count;
   }
 
   static Future<int> deleteNote(int noteId) async {

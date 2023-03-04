@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         // locale: const Locale('ar', 'su'),
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      home:  NotesPage()
+      home:  const NotesPage()
     );
   }
 }

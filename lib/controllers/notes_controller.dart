@@ -58,21 +58,22 @@ class NotesController extends GetxController{
       snackPosition: SnackPosition.BOTTOM);
     }
   }
-  void updateNote(int? id) async {
+
+  void updateNote(Note updatedNote) async {
     String title = titleController.text;
     String content = contentController.text;
-    Note note = Note(
-      id: id,
-      title: title,
-      content: content,
-      updatedAt: DateTime.now().toString(),
-    );
-    await DatabaseHelper.updateNote(note);
+    updatedNote.title = title;
+    updatedNote.content = content;
+    updatedNote.updatedAt = DateTime.now().toString();
+    log(updatedNote.toString());
+
+    await DatabaseHelper.updateNote(updatedNote);
     titleController.text = "";
     contentController.text = "";
     getAllNotes();
     Get.offAll(()=>NotesPage());
   }
+
   void deleteNote(int? noteId) async{
     await DatabaseHelper.deleteNote(noteId!);
     getAllNotes();

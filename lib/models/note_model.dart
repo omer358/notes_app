@@ -1,11 +1,11 @@
 class Note {
-  final int? id;
-  final String title;
-  final String content;
-  final String? createdDate;
-  final String updatedAt;
+   int? id;
+   String title;
+   String content;
+   final String? createdDate;
+   String updatedAt;
 
-  const Note(
+   Note(
       {required
       this.title,
       required this.content,
@@ -34,7 +34,7 @@ class Note {
     return "ID: $id \n,"
         " Title: $title \n,  "
         "Content: $content \n, "
-        "Created At: $createdDate, "
+        "Created At: $createdDate,\n "
         "Last Update: $updatedAt";
   }
 }

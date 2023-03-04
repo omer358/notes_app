@@ -54,7 +54,7 @@ class NoteEditor extends StatelessWidget{
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: ()  async{
-            notesController.updateNote(note.id);
+            notesController.updateNote(note);
           },
           label: Text("save".tr),
           icon: const Icon( Icons.save )),
