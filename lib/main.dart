@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         title: "My app",
         initialBinding: NotesBindings(),
         translations: AppTranslations(),
-        locale: const Locale('ar', 'su'),
+        debugShowCheckedModeBanner: false,
+        // locale: const Locale('ar', 'su'),
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       home:  NotesPage()

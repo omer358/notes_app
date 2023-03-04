@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/screens/empty_state_screen.dart';
 import 'package:notes_app/screens/note_viewer_screen.dart';
@@ -14,6 +17,17 @@ class NotesPage extends GetWidget<NotesController> {
     return Scaffold(
       appBar: AppBar(
         title: Text("notes".tr),
+        actions: [
+          IconButton(
+              onPressed: () {
+                log("The button has been clicked!");
+                var _title = lorem(paragraphs: 1, words: 5);
+                var _content = lorem(paragraphs: 5, words: 500);
+                log(_title);
+                controller.addNoteToDatabase(_title, _content);
+              },
+              icon: const Icon(Icons.access_alarm_sharp))
+        ],
       ),
       body: Obx(
         () => controller.isNotesListEmpty()
@@ -38,13 +52,12 @@ class NotesPage extends GetWidget<NotesController> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title:  Text(
-                                  'delete_msg'.tr),
+                              title: Text('delete_msg'.tr),
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    controller.deleteNote(controller
-                                        .notesList.value[index].id);
+                                    controller.deleteNote(
+                                        controller.notesList.value[index].id);
                                   },
                                   child: Text('yes'.tr),
                                 ),
@@ -52,7 +65,7 @@ class NotesPage extends GetWidget<NotesController> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child:  Text('no'.tr),
+                                  child: Text('no'.tr),
                                 ),
                               ],
                             );
@@ -68,9 +81,11 @@ class NotesPage extends GetWidget<NotesController> {
         onPressed: () async {
           Get.to(CreateNewNote());
         },
-        label:  Text("create".tr),
+        label: Text("create".tr),
         icon: const Icon(Icons.add),
       ),
     );
   }
+
+  void _fillDB() {}
 }

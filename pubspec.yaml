@@ -40,6 +40,7 @@ dependencies:
   get: ^4.6.5
   path: ^1.8.2
   lottie: ^2.2.0
+  flutter_lorem: ^2.0.0
 
 dev_dependencies:
   flutter_test:
