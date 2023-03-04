@@ -15,7 +15,7 @@ class NotesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notes"),
+        title: Text("notes".tr),
       ),
       body: Obx(
         () => noteController.isEmpty()
@@ -40,21 +40,21 @@ class NotesPage extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text(
-                                  'Are you sure you want to delete this note?'),
+                              title:  Text(
+                                  'delete_msg'.tr),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     noteController.deleteNote(noteController
                                         .notesList.value[index].id);
                                   },
-                                  child: const Text('Yes'),
+                                  child: Text('yes'.tr),
                                 ),
                                 TextButton(
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child: const Text('No'),
+                                  child:  Text('no'.tr),
                                 ),
                               ],
                             );
@@ -70,7 +70,7 @@ class NotesPage extends StatelessWidget {
         onPressed: () async {
           Get.to(CreateNewNote());
         },
-        label: const Text("create"),
+        label:  Text("create".tr),
         icon: const Icon(Icons.add),
       ),
     );

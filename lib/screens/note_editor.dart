@@ -15,7 +15,7 @@ class NoteEditor extends StatelessWidget{
     notesController.contentController.text = note.content;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit note",
+        title:  Text("edit_note".tr,
         ),
       ),
       body: Padding(
@@ -28,9 +28,9 @@ class NoteEditor extends StatelessWidget{
               TextField(
                 controller: notesController.titleController,
                 textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Note Title",
+                  hintText: "note_title".tr,
                 ),
                 style: AppStyle.mainTitle,
               ),
@@ -40,9 +40,9 @@ class NoteEditor extends StatelessWidget{
                 textCapitalization: TextCapitalization.sentences,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Note Content",
+                  hintText: "note_content".tr,
                 ),
                 style: AppStyle.mainContent,
               ),
@@ -53,7 +53,7 @@ class NoteEditor extends StatelessWidget{
           onPressed: ()  async{
             notesController.updateNote(note.id);
           },
-          label: const Text("Save"),
+          label: Text("save".tr),
           icon: const Icon( Icons.save )),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class  EmptyState extends StatelessWidget {
@@ -11,8 +12,8 @@ class  EmptyState extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Lottie.asset('assets/images/empty.json'),
-        const Text(
-          "No Notes Yet!",style: TextStyle(
+         Text(
+          "empty_state".tr,style: const TextStyle(
             fontSize: 25,fontWeight: FontWeight.w500
         ),
         ),

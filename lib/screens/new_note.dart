@@ -12,7 +12,7 @@ class CreateNewNote extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create note",
+        title: Text("create_note".tr,
         ),
       ),
       body: Padding(
@@ -25,9 +25,9 @@ class CreateNewNote extends StatelessWidget{
             TextField(
               controller: notesController.titleController,
               textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 border: InputBorder.none,
-                hintText: "Note Title",
+                hintText: "note_title".tr,
               ),
               style: AppStyle.mainTitle,
             ),
@@ -37,9 +37,9 @@ class CreateNewNote extends StatelessWidget{
               textCapitalization: TextCapitalization.sentences,
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: "Note Content",
+                hintText: "note_content".tr,
               ),
               style: AppStyle.mainContent,
             ),
@@ -52,7 +52,7 @@ class CreateNewNote extends StatelessWidget{
             String content = notesController.contentController.text;
             notesController.addNoteToDatabase(title,content);
           },
-          label: const Text("Add"),
+          label: Text("add".tr),
           icon: const Icon( Icons.add )),
     );
   }

@@ -18,39 +18,44 @@ class NoteViewer extends StatelessWidget {
     final Note note = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Note Viewer"),
+        title: Text("note_viewer".tr),
         actions: [
           IconButton(
               onPressed: (){
                 Get.to(()=> NoteEditor(), arguments: note);
               },
-              icon: const Icon(Icons.edit)),
-          IconButton(onPressed: (){
+              icon: const Icon(Icons.edit),
+            tooltip: 'edit'.tr,
+          ),
+          IconButton(
+            onPressed: (){
             showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: const Text(
-                      'Are you sure you want to delete this note?'),
+                  title:  Text(
+                      'delete_msg'.tr),
                   actions: [
                     TextButton(
                       onPressed: () {
                         noteController.deleteNote(note.id);
                         Get.offAll(NotesPage());
                       },
-                      child: const Text('Yes'),
+                      child: Text('yes'.tr),
                     ),
                     TextButton(
                       onPressed: () {
                         Get.back();
                       },
-                      child: const Text('No'),
+                      child:  Text('no'.tr),
                     ),
                   ],
                 );
               },
             );
-          }, icon: const Icon(Icons.delete),)
+          },
+            icon: const Icon(Icons.delete),
+          tooltip: 'delete'.tr,)
         ],
       ),
       body: Padding(
