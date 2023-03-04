@@ -42,6 +42,8 @@ class NotesController extends GetxController{
       Note note = Note(
         title: title,
         content: content,
+        createdDate: DateTime.now().toString(),
+        updatedAt: DateTime.now().toString()
       );
       await DatabaseHelper.addNote(note);
       titleController.text = "";
@@ -63,6 +65,7 @@ class NotesController extends GetxController{
       id: id,
       title: title,
       content: content,
+      updatedAt: DateTime.now().toString(),
     );
     await DatabaseHelper.updateNote(note);
     titleController.text = "";

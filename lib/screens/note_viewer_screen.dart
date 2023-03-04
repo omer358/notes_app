@@ -68,6 +68,10 @@ class NoteViewer extends StatelessWidget {
               note.title,
               style: AppStyle.mainTitle,
             ),
+            const SizedBox(height: 8.0),
+            Text("Crated At: ${note.createdDate}"),
+            const SizedBox(height: 4.0),
+            Text("Last Update : ${note.updatedAt}"),
             const SizedBox(height: 12.0),
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 4),
