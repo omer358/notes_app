@@ -17,7 +17,12 @@ class NotesController extends GetxController{
     getAllNotes();
   }
 
-  bool isEmpty() {
+  @override
+  void onClose() {
+    log("The controller has been deleted");
+  }
+
+  bool isNotesListEmpty() {
     if (notesList.value.isEmpty) {
       log("is Empty!");
       return true;
@@ -29,6 +34,7 @@ class NotesController extends GetxController{
 
   Future getAllNotes() async{
     notesList.value = await DatabaseHelper.getAllNotes();
+    log("the notelist is ready!");
   }
 
   void addNoteToDatabase(String title, String content) async {

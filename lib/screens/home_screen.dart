@@ -6,10 +6,8 @@ import '../widgets/note_card.dart';
 import 'new_note.dart';
 import 'package:get/get.dart';
 
-class NotesPage extends StatelessWidget {
-  NotesPage({super.key});
-
-  final noteController = Get.put(NotesController());
+class NotesPage extends GetWidget<NotesController> {
+  const NotesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class NotesPage extends StatelessWidget {
         title: Text("notes".tr),
       ),
       body: Obx(
-        () => noteController.isEmpty()
+        () => controller.isNotesListEmpty()
             ? const Center(child: EmptyState())
             : Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -28,12 +26,12 @@ class NotesPage extends StatelessWidget {
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 300,
                     ),
-                    itemCount: noteController.notesList.value.length,
+                    itemCount: controller.notesList.value.length,
                     itemBuilder: (context, index) => NoteCard(
-                      note: noteController.notesList.value[index],
+                      note: controller.notesList.value[index],
                       onTap: () async {
                         Get.to(() => NoteViewer(),
-                            arguments: noteController.notesList.value[index]);
+                            arguments: controller.notesList.value[index]);
                       },
                       onLongPress: () async {
                         showDialog(
@@ -45,7 +43,7 @@ class NotesPage extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    noteController.deleteNote(noteController
+                                    controller.deleteNote(controller
                                         .notesList.value[index].id);
                                   },
                                   child: Text('yes'.tr),

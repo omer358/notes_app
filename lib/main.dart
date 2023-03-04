@@ -4,6 +4,8 @@ import 'package:notes_app/screens/home_screen.dart';
 import 'package:notes_app/style/color_schemes.g.dart';
 import 'package:notes_app/translation.dart';
 
+import 'controllers/bindings/notes_bindings.dart';
+
 void main(List<String> args) {
   runApp(const MyApp());
 }
@@ -14,7 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "My app",
+        title: "My app",
+        initialBinding: NotesBindings(),
         translations: AppTranslations(),
         locale: const Locale('ar', 'su'),
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
