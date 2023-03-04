@@ -68,10 +68,13 @@ class NoteViewer extends StatelessWidget {
               note.title,
               style: AppStyle.mainTitle,
             ),
-            const SizedBox(height: 16.0),
-            SelectableText(
-              note.content,
-              style: AppStyle.mainContent,
+            const SizedBox(height: 12.0),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 4),
+              child: SelectableText(
+                note.content,
+                style: AppStyle.mainContent,
+              ),
             ),
           ],
         ),

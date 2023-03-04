@@ -31,17 +31,20 @@ class CreateNewNote extends StatelessWidget{
               ),
               style: AppStyle.mainTitle,
             ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: notesController.contentController,
-              textCapitalization: TextCapitalization.sentences,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "note_content".tr,
+            const SizedBox(height: 12.0),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 4),
+              child: TextField(
+                controller: notesController.contentController,
+                textCapitalization: TextCapitalization.sentences,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "note_content".tr,
+                ),
+                style: AppStyle.mainContent,
               ),
-              style: AppStyle.mainContent,
             ),
           ],
         ),),
