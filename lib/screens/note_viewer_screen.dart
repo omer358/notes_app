@@ -69,19 +69,25 @@ class NoteViewer extends StatelessWidget {
                 style: AppStyle.mainTitle,
               ),
               const SizedBox(height: 8.0),
-              Text("Created: "
-                  "${DateFormat('MMM, '
-                      'd, '
-                      'yyyy').format(
-                DateTime.parse(note.createdDate.toString()),
-              )}"),
+              Text(
+                "Created: "
+                "${DateFormat('MMM, '
+                    'd, '
+                    'yyyy').format(
+                  DateTime.parse(note.createdDate.toString()),
+                )}",
+                style: AppStyle.dateTitle,
+              ),
               const SizedBox(height: 2.0),
-              Text("Edited: "
-                  "${DateFormat('EEEE, '
-                      'MMM d, '
-                      'hh:mm a ').format(
-                DateTime.parse(note.updatedAt),
-              )}"),
+              Text(
+                "Edited: "
+                "${DateFormat('EEEE, '
+                    'MMM d, '
+                    'hh:mm a ').format(
+                  DateTime.parse(note.updatedAt),
+                )}",
+                style: AppStyle.dateTitle,
+              ),
               const SizedBox(height: 12.0),
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 4),
