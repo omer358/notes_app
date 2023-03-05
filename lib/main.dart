@@ -20,10 +20,9 @@ class MyApp extends StatelessWidget {
         initialBinding: NotesBindings(),
         translations: AppTranslations(),
         debugShowCheckedModeBanner: false,
-        // locale: const Locale('ar', 'su'),
+        locale: const Locale('en', 'us'),
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      home:  const NotesPage()
-    );
+        home: const NotesPage());
   }
 }

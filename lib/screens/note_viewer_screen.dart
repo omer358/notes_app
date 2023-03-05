@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_app/screens/home_screen.dart';
 import 'package:notes_app/style/app_style.dart';
 
@@ -69,9 +69,19 @@ class NoteViewer extends StatelessWidget {
                 style: AppStyle.mainTitle,
               ),
               const SizedBox(height: 8.0),
-              Text("Crated At: ${note.createdDate}"),
-              const SizedBox(height: 4.0),
-              Text("Last Update : ${note.updatedAt}"),
+              Text("Created: "
+                  "${DateFormat('MMM, '
+                      'd, '
+                      'yyyy').format(
+                DateTime.parse(note.createdDate.toString()),
+              )}"),
+              const SizedBox(height: 2.0),
+              Text("Edited: "
+                  "${DateFormat('EEEE, '
+                      'MMM d, '
+                      'hh:mm a ').format(
+                DateTime.parse(note.updatedAt),
+              )}"),
               const SizedBox(height: 12.0),
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 4),
