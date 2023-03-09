@@ -2,12 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:get/get.dart';
 import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/screens/empty_state_screen.dart';
 import 'package:notes_app/screens/note_viewer_screen.dart';
+
 import '../widgets/note_card.dart';
 import 'new_note.dart';
-import 'package:get/get.dart';
 
 class NotesPage extends GetWidget<NotesController> {
   const NotesPage({super.key});
@@ -26,7 +27,7 @@ class NotesPage extends GetWidget<NotesController> {
                 log(_title);
                 controller.addNoteToDatabase(_title, _content);
               },
-              icon: const Icon(Icons.access_alarm_sharp))
+              icon: const Icon(Icons.ads_click))
         ],
       ),
       body: Obx(
@@ -86,6 +87,4 @@ class NotesPage extends GetWidget<NotesController> {
       ),
     );
   }
-
-  void _fillDB() {}
 }
