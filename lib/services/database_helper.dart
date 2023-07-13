@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  static const int _version = 2;
+  static const int _version = 3;
   static const String _dbName = "Notes.db";
 
   static Future<Database> _getDB() async {
@@ -49,7 +49,9 @@ class DatabaseHelper {
   static Future<List<Note>> getAllNotes() async {
     final db =   await _getDB();
 
-    final List<Map<String, dynamic>> maps = await db.query("Note");
+    final List<Map<String, dynamic>> maps =
+    await db.query("Note",
+        orderBy: "created_date DESC");
 
     if (maps.isEmpty) {
       return [];
