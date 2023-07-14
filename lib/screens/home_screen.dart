@@ -42,38 +42,48 @@ class NotesPage extends GetWidget<NotesController> {
                       maxCrossAxisExtent: 300,
                     ),
                     itemCount: controller.notesList.value.length,
-                    itemBuilder: (context, index) => NoteCard(
-                      note: controller.notesList.value[index],
-                      onTap: () async {
-                        Get.to(() => NoteViewer(),
-                            arguments: controller.notesList.value[index]);
-                      },
-                      onLongPress: () async {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('delete_msg'.tr),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    controller.deleteNote(
-                                        controller.notesList.value[index].id);
-                                  },
-                                  child: Text('yes'.tr),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: Text('no'.tr),
-                                ),
-                              ],
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: UniqueKey(),
+                        onDismissed: (direction){
+                          controller.deleteNote(controller.notesList.value[index].id);
+                        },
+
+
+                        child: NoteCard(
+                          note: controller.notesList.value[index],
+                          onTap: () async {
+                            Get.to(() => NoteViewer(),
+                                arguments: controller.notesList.value[index]);
+                          },
+                          onLongPress: () async {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('delete_msg'.tr),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        controller.deleteNote(
+                                            controller.notesList.value[index]
+                                                .id);
+                                      },
+                                      child: Text('yes'.tr),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: Text('no'.tr),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                    ),
+                        ),
+                      );}
                   ),
                 ),
               ),
