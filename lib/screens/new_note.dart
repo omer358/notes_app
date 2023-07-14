@@ -55,7 +55,7 @@ class CreateNewNote extends StatelessWidget {
           onPressed: () async {
             String title = notesController.titleController.text;
             String content = notesController.contentController.text;
-            notesController.addNoteToDatabase(title, content);
+            notesController.addNote(title, content);
           },
           label: Text("add".tr),
           icon: const Icon(Icons.add)),

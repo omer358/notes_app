@@ -37,7 +37,7 @@ class NotesController extends GetxController{
     log("the notelist is ready!");
   }
 
-  void addNoteToDatabase(String title, String content) async {
+  void addNote(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {
       Note note = Note(
         title: title,

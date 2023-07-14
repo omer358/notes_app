@@ -25,7 +25,7 @@ class NotesPage extends GetWidget<NotesController> {
                 var _title = lorem(paragraphs: 1, words: 5);
                 var _content = lorem(paragraphs: 5, words: 500);
                 log(_title);
-                controller.addNoteToDatabase(_title, _content);
+                controller.addNote(_title, _content);
               },
               icon: const Icon(Icons.ads_click))
         ],
