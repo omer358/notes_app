@@ -45,11 +45,18 @@ class NotesPage extends GetWidget<NotesController> {
                     itemBuilder: (context, index) {
                       return Dismissible(
                         key: UniqueKey(),
+                        secondaryBackground: Container(
+                          color: Colors.red,
+                          child: const Center(
+                            child: Icon(
+                              Icons.delete_forever
+                            ),
+                          ),
+                        ),
+                        background: Container(color: Colors.red),
                         onDismissed: (direction){
                           controller.deleteNote(controller.notesList.value[index].id);
                         },
-
-
                         child: NoteCard(
                           note: controller.notesList.value[index],
                           onTap: () async {
