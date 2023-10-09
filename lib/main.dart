@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:notes_app/screens/home_screen.dart';
+import 'package:notes_app/screens/login/login_screen.dart';
 import 'package:notes_app/style/color_schemes.g.dart';
 import 'package:notes_app/translation.dart';
 
@@ -23,6 +23,6 @@ class MyApp extends StatelessWidget {
         locale: const Locale('en', 'us'),
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-        home: const NotesPage());
+        home: LoginScreen());
   }
 }
