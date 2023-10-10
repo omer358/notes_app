@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/screens/notes/home_screen.dart';
+import 'package:notes_app/services/network_calls.dart';
 
-class LoginScreen extends GetWidget {
+class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool passwordVisibility = true;
+  final RestAPI restAPI = Get.find<RestAPI>();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,9 @@ class LoginScreen extends GetWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.off(() => const NotesPage());
+                        // Get.off(() => const NotesPage());
+                        var dataMethod = restAPI.getDataMethod();
+                        dataMethod.then((value) => print(value));
                       },
                       child: const Text("Login"),
                     ),
