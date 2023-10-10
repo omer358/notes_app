@@ -4,15 +4,12 @@ import 'package:notes_app/core/authentication_manager.dart';
 import 'package:notes_app/screens/on_board.dart';
 
 class SplashView extends StatelessWidget {
-  final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
+  final AuthenticationManager _authManager = Get.put(AuthenticationManager());
 
   SplashView({super.key});
 
   Future<void> initializeSettings() async {
-    _authmanager.checkLoginStatus();
-
-    //Simulate other services for 3 seconds
-    await Future.delayed(const Duration(seconds: 3));
+    _authManager.checkLoginStatus();
   }
 
   @override
