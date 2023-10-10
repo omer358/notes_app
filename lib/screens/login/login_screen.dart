@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/screens/home_screen.dart';
+import 'package:notes_app/screens/notes/home_screen.dart';
 
 class LoginScreen extends GetWidget {
   LoginScreen({super.key});

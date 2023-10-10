@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/models/note_model.dart';
-import 'package:notes_app/screens/home_screen.dart';
+import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/services/database_helper.dart';
 
 class NotesController extends GetxController{

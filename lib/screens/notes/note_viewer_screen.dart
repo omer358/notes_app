@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:notes_app/screens/home_screen.dart';
+import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/style/app_style.dart';
 
-import '../controllers/notes_controller.dart';
-import '../models/note_model.dart';
+import '../../controllers/notes_controller.dart';
+import '../../models/note_model.dart';
 import 'note_editor.dart';
 
 class NoteViewer extends StatelessWidget {
