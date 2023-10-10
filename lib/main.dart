@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:notes_app/controllers/bindings/dependency_injection.dart';
 import 'package:notes_app/screens/login/login_screen.dart';
 import 'package:notes_app/screens/routes/app_pages.dart';
 import 'package:notes_app/style/color_schemes.g.dart';
@@ -9,6 +10,7 @@ import 'controllers/bindings/notes_bindings.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
+  DependencyInjection.init();
 }
 
 class MyApp extends StatelessWidget {
