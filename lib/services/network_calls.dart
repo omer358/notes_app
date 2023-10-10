@@ -4,7 +4,6 @@
 // import 'package:http/http.dart' as http;
 // import 'dart:convert';
 
-
 // Future<List<Note>> fetchAllUsers() async {
 //   // use local host http://localhost:8000 for IOS
 //   // use http://10.0.2.2:8000 for android emulator
@@ -38,3 +37,39 @@
 //           body: data);
 //   log(response.statusCode.toString());
 // }
+
+import 'dart:developer';
+
+import 'package:get/get.dart';
+
+class RestAPI {
+  final GetConnect connect = Get.find<GetConnect>();
+
+  //GET request example
+  Future<dynamic> getDataMethod() async {
+    Response response = await connect.get('http://10.0.2.2:8000/ping');
+    if (response.statusCode == 200) {
+      log("200 OK");
+      return response.body;
+    } else {
+      log("Something went wrong");
+      return null;
+    }
+  }
+
+  //post request example
+  Future<dynamic> postDataMethod() async {
+    //body data
+    FormData formData = FormData({
+      'field_name': 'field_value',
+      'field_name': 'field_value',
+    });
+
+    Response response = await connect.post('your_post_api_url', formData);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return null;
+    }
+  }
+}
