@@ -10,7 +10,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    apiService = Get.put(RestAPI());
+    apiService = Get.find<RestAPI>();
     _authManager = Get.find();
   }
 
@@ -30,6 +30,10 @@ class LoginController extends GetxController {
             Get.back();
           });
     }
+  }
+
+  void logoutUser() {
+    _authManager.logOut();
   }
 //
 // Future<void> registerUser(String email, String password) async {

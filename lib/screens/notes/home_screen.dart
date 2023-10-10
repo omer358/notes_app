@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/controllers/login_controller.dart';
 import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/screens/empty_state_screen.dart';
 import 'package:notes_app/screens/notes/note_viewer_screen.dart';
@@ -11,7 +12,9 @@ import '../../widgets/note_card.dart';
 import 'new_note.dart';
 
 class NotesPage extends GetWidget<NotesController> {
-  const NotesPage({super.key});
+  NotesPage({super.key});
+
+  LoginController loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,12 @@ class NotesPage extends GetWidget<NotesController> {
                 log(_title);
                 controller.addNote(_title, _content);
               },
-              icon: const Icon(Icons.ads_click))
+              icon: const Icon(Icons.ads_click)),
+          IconButton(
+              onPressed: () {
+                loginController.logoutUser();
+              },
+              icon: const Icon(Icons.logout))
         ],
       ),
       body: Obx(
