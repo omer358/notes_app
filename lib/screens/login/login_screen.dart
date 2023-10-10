@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/services/network_calls.dart';
+import 'package:notes_app/controllers/login_controller.dart';
+import 'package:notes_app/services/apis/network_calls.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  LoginController _loginController = Get.find<LoginController>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool passwordVisibility = true;
+
   final RestAPI restAPI = Get.find<RestAPI>();
 
   @override
@@ -116,10 +125,9 @@ class LoginScreen extends StatelessWidget {
                       height: 25,
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        // Get.off(() => const NotesPage());
-                        var dataMethod = restAPI.getDataMethod();
-                        dataMethod.then((value) => print(value));
+                      onPressed: () async {
+                        await _loginController.loginUser(
+                            _emailController.text, _passController.text);
                       },
                       child: const Text("Login"),
                     ),
