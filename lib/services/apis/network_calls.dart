@@ -63,7 +63,7 @@ class RestAPI {
   }
 
   Future<LoginResponseModel?> fetchLogin(LoginRequestModel model) async {
-    final response = await connect.post("$BASE_URL/login", model.toJson());
+    final response = await connect.post("$BASE_URL/api/token", model.toJson());
 
     if (response.statusCode == HttpStatus.ok) {
       return LoginResponseModel.fromJson(response.body);
