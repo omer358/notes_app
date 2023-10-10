@@ -41,6 +41,9 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:notes_app/models/login_request_model.dart';
+import 'package:notes_app/models/login_response_model.dart';
 import 'package:notes_app/models/note_model.dart';
 
 class RestAPI {
@@ -55,6 +58,16 @@ class RestAPI {
       return response.body;
     } else {
       log("Something went wrong");
+      return null;
+    }
+  }
+
+  Future<LoginResponseModel?> fetchLogin(LoginRequestModel model) async {
+    final response = await connect.post("$BASE_URL/login", model.toJson());
+
+    if (response.statusCode == HttpStatus.ok) {
+      return LoginResponseModel.fromJson(response.body);
+    } else {
       return null;
     }
   }
