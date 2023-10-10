@@ -41,13 +41,15 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:notes_app/models/note_model.dart';
 
 class RestAPI {
+  static const String BASE_URL = "http://10.0.2.2:8000";
   final GetConnect connect = Get.find<GetConnect>();
 
   //GET request example
   Future<dynamic> getDataMethod() async {
-    Response response = await connect.get('http://10.0.2.2:8000/ping');
+    Response response = await connect.get('$BASE_URL/ping');
     if (response.statusCode == 200) {
       log("200 OK");
       return response.body;
@@ -57,11 +59,25 @@ class RestAPI {
     }
   }
 
+  Future<dynamic> fetchAllNotes() async {
+    Map<String, String> authorization = {"Authorization": "Token "};
+    Response response =
+        await connect.request("$BASE_URL/notes", "GET", headers: authorization);
+    if (response.statusCode == 200) {
+      log("response 200 OK");
+      return Note.fromJson(response.body);
+    } else {
+      log("Something went wrong!");
+      log(response.statusCode.toString());
+      return null;
+    }
+  }
+
   //post request example
-  Future<dynamic> postDataMethod() async {
+  Future<dynamic> postNewNote() async {
     //body data
     FormData formData = FormData({
-      'field_name': 'field_value',
+      'title': 'field_value',
       'field_name': 'field_value',
     });
 
