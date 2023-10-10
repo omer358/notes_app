@@ -40,11 +40,10 @@ class NotesController extends GetxController{
   void addNote(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {
       Note note = Note(
-        title: title,
-        content: content,
-        createdDate: DateTime.now().toString(),
-        updatedAt: DateTime.now().toString()
-      );
+          title: title,
+          content: content,
+          createdDate: DateTime.now().toString(),
+          modifiedAt: DateTime.now().toString());
       await DatabaseHelper.addNote(note);
       titleController.text = "";
       contentController.text = "";
@@ -64,7 +63,7 @@ class NotesController extends GetxController{
     String content = contentController.text;
     updatedNote.title = title;
     updatedNote.content = content;
-    updatedNote.updatedAt = DateTime.now().toString();
+    updatedNote.modifiedAt = DateTime.now().toString();
     log(updatedNote.toString());
 
     await DatabaseHelper.updateNote(updatedNote);

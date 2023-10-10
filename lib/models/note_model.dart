@@ -1,32 +1,30 @@
 class Note {
    int? id;
-   String title;
-   String content;
-   final String? createdDate;
-   String updatedAt;
+  String title;
+  String content;
+  final String? createdDate;
+  String modifiedAt;
 
-   Note(
-      {required
-      this.title,
+  Note(
+      {required this.title,
       required this.content,
       this.id,
       this.createdDate,
-      required this.updatedAt});
+      required this.modifiedAt});
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
-        id: json['id'],
         title: json['title'],
         content: json['content'],
         createdDate: json['created_date'],
-        updatedAt: json['updated_at'],
+        modifiedAt: json['modified_at'],
       );
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
+  Map<String, dynamic> toJson() =>
+      {
         'title': title,
         'content': content,
         'created_date': createdDate,
-        'updated_at': updatedAt,
+        'modified_at': modifiedAt,
       };
 
   @override
@@ -35,6 +33,6 @@ class Note {
         " Title: $title \n,  "
         "Content: $content \n, "
         "Created At: $createdDate,\n "
-        "Last Update: $updatedAt";
+        "Last Update: $modifiedAt";
   }
 }

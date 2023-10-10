@@ -84,7 +84,7 @@ class NoteViewer extends StatelessWidget {
                 "${DateFormat('EEEE, '
                     'MMM d, '
                     'hh:mm a ').format(
-                  DateTime.parse(note.updatedAt),
+                  DateTime.parse(note.modifiedAt),
                 )}",
                 style: AppStyle.dateTitle,
               ),
