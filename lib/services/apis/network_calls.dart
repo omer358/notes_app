@@ -1,53 +1,14 @@
-// import 'dart:developer';
-// import 'dart:io';
-
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-
-// Future<List<Note>> fetchAllUsers() async {
-//   // use local host http://localhost:8000 for IOS
-//   // use http://10.0.2.2:8000 for android emulator
-//   final response =
-//       await http.get(Uri.parse("http://10.0.2.2:8000 /notes/"), headers: {
-//     HttpHeaders.authorizationHeader:
-//         "Token 2eecc26069498a70db3ced8c6f636a37053015b6"
-//   });
-//   if (response.statusCode == 200) {
-//     List jsonResponse = json.decode(response.body);
-//     return jsonResponse.map((data) => Note.fromJson(data)).toList();
-//   } else {
-//     throw Exception("Failed to load Notes");
-//   }
-// }
-
-// Future<void> createNote(Note newNote) async {
-//   var data = json.encode(<String, dynamic>{
-//     "title": newNote.title,
-//     "content": newNote.content,
-//     "color_id": newNote.color,
-//   });
-//   log(data);
-//   http.Response response =
-//       await http.post(Uri.parse("http://10.0.2.2:8000 /notes/"),
-//           headers: {
-//             'Content-Type': 'application/json',
-//             HttpHeaders.authorizationHeader:
-//                 "Token 2eecc26069498a70db3ced8c6f636a37053015b6"
-//           },
-//           body: data);
-//   log(response.statusCode.toString());
-// }
-
 import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
-import 'package:notes_app/models/note_model.dart';
 
 class RestAPI {
   static const String BASE_URL = "http://10.0.2.2:8000";
+  static const String TOKEN =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk3MDI3ODQzLCJpYXQiOjE2OTY5NDE0NDMsImp0aSI6ImEyMzRmMmQ0MDQwMDRjZTRhNzNmZjY0YWM5ZmY5ZTM2IiwidXNlcl9pZCI6MX0.cSFlFsB_mS02evDKL6KRvvSXnTNCL3A1RjoSU4iJ7Ak";
   final GetConnect connect = Get.find<GetConnect>();
 
   //GET request example
@@ -68,21 +29,23 @@ class RestAPI {
     if (response.statusCode == HttpStatus.ok) {
       return LoginResponseModel.fromJson(response.body);
     } else {
+      log("Something went wrong! ${response.statusCode}");
+      log(response.body);
       return null;
     }
   }
 
-  Future<dynamic> fetchAllNotes() async {
-    Map<String, String> authorization = {"Authorization": "Token "};
+  Future<List<dynamic>> fetchAllNotes() async {
+    Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
     Response response =
         await connect.request("$BASE_URL/notes", "GET", headers: authorization);
-    if (response.statusCode == 200) {
-      log("response 200 OK");
-      return Note.fromJson(response.body);
+    if (response.isOk) {
+      List<dynamic> data = response.body;
+      return data;
     } else {
       log("Something went wrong!");
       log(response.statusCode.toString());
-      return null;
+      return [];
     }
   }
 

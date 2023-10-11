@@ -4,14 +4,13 @@ import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/services/apis/network_calls.dart';
 
 class LoginController extends GetxController {
-  late final RestAPI apiService;
+  final RestAPI apiService = Get.find<RestAPI>();
   late final AuthenticationManager _authManager;
 
   @override
   void onInit() {
     super.onInit();
-    apiService = Get.find<RestAPI>();
-    _authManager = Get.find();
+    _authManager = Get.find<AuthenticationManager>();
   }
 
   Future<void> loginUser(String email, String password) async {

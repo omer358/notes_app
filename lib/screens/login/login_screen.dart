@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/controllers/login_controller.dart';
-import 'package:notes_app/services/apis/network_calls.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,14 +10,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> formKey = GlobalKey();
   LoginController _loginController = Get.find<LoginController>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool passwordVisibility = true;
-
-  final RestAPI restAPI = Get.find<RestAPI>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

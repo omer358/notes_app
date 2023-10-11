@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
+import 'package:notes_app/services/apis/network_calls.dart';
 import 'package:notes_app/services/database_helper.dart';
 
-class NotesController extends GetxController{
+class NotesController extends GetxController {
   Rx<List<Note>> notesList = Rx<List<Note>>([]);
   var titleController = TextEditingController();
   var contentController = TextEditingController();
+  RestAPI restAPI = Get.find<RestAPI>();
 
   @override
   void onInit() {
@@ -32,10 +34,20 @@ class NotesController extends GetxController{
     }
   }
 
-  Future getAllNotes() async{
-    notesList.value = await DatabaseHelper.getAllNotes();
-    log("the notelist is ready!");
+  Future getAllNotes() async {
+    var results = await restAPI.fetchAllNotes();
+    List<Note> notes = List.generate(
+      results.length,
+      (index) => Note.fromJson(results[index]),
+    );
+    log(notes.length.toString());
+    notesList.value.addAll(notes);
   }
+
+  // Future getAllNotes() async {
+  //   notesList.value = await DatabaseHelper.getAllNotes();
+  //   log("the notelist is ready!");
+  // }
 
   void addNote(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {
@@ -49,12 +61,9 @@ class NotesController extends GetxController{
       contentController.text = "";
       getAllNotes();
       Get.back();
-    }
-    else{
-      Get.snackbar(
-          "Unable to save",
-          "You can not Create an empty note!",
-      snackPosition: SnackPosition.BOTTOM);
+    } else {
+      Get.snackbar("Unable to save", "You can not Create an empty note!",
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -69,13 +78,13 @@ class NotesController extends GetxController{
     await DatabaseHelper.updateNote(updatedNote);
     titleController.text = "";
     contentController.text = "";
-    getAllNotes();
-    Get.offAll(()=>NotesPage());
+    // getAllNotes();
+    Get.offAll(() => NotesPage());
   }
 
-  void deleteNote(int? noteId) async{
+  void deleteNote(int? noteId) async {
     await DatabaseHelper.deleteNote(noteId!);
-    getAllNotes();
+    // getAllNotes();
     Get.back();
   }
 }
