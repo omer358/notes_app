@@ -1,26 +1,27 @@
 class Note {
-   int? id;
+  int? id;
   String title;
   String content;
   final String? createdDate;
   String modifiedAt;
 
   Note(
-      {required this.title,
+      {this.id,
+      required this.title,
       required this.content,
-      this.id,
       this.createdDate,
       required this.modifiedAt});
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
+        id: json['id'],
         title: json['title'],
         content: json['content'],
         createdDate: json['created_date'],
         modifiedAt: json['modified_at'],
       );
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
+        'id': id,
         'title': title,
         'content': content,
         'created_date': createdDate,

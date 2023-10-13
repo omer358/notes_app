@@ -83,8 +83,9 @@ class NotesController extends GetxController {
   }
 
   void deleteNote(int? noteId) async {
-    await DatabaseHelper.deleteNote(noteId!);
-    // getAllNotes();
+    log.info(noteId);
+    await restAPI.deleteNote(noteId!);
+    getAllNotes();
     Get.back();
   }
 }

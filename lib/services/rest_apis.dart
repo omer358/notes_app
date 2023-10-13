@@ -1,12 +1,12 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:logging/logging.dart';
 import 'package:notes_app/controllers/bindings/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 
 class RestAPIs {
+  final log = Logger("RestAPIs");
   static const String BASE_URL = "http://10.0.2.2:8000";
   final GetConnect connect = Get.find<GetConnect>();
 
@@ -14,10 +14,10 @@ class RestAPIs {
   Future<dynamic> getDataMethod() async {
     Response response = await connect.get('$BASE_URL/ping');
     if (response.statusCode == 200) {
-      log("200 OK");
+      log.finest("200 OK");
       return response.body;
     } else {
-      log("Something went wrong");
+      log.finest("Something went wrong");
       return null;
     }
   }
@@ -28,8 +28,8 @@ class RestAPIs {
     if (response.statusCode == HttpStatus.ok) {
       return LoginResponseModel.fromJson(response.body);
     } else {
-      log("Something went wrong! ${response.statusCode}");
-      log(response.body);
+      log.shout("Something went wrong! ${response.statusCode}");
+      log.shout(response.body);
       return null;
     }
   }
@@ -43,9 +43,22 @@ class RestAPIs {
       List<dynamic> data = response.body;
       return data;
     } else {
-      log("Something went wrong!");
-      log(response.statusCode.toString());
+      log.shout("Something went wrong! ${response.statusCode.toString()}");
       return [];
+    }
+  }
+
+  Future deleteNote(int noteId) async {
+    String? TOKEN = Get.find<AuthenticationManager>().getToken();
+    Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
+    Response response = await connect
+        .request("$BASE_URL/notes/$noteId/", "DELETE", headers: authorization);
+    if (response.statusCode == 204) {
+      log.finest(
+          "The note with $noteId has been deleted, ${response.statusCode.toString()}");
+      return;
+    } else {
+      log.shout("something went wrong");
     }
   }
 
