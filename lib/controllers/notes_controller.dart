@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logging/logging.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/services/apis/network_calls.dart';
 import 'package:notes_app/services/database_helper.dart';
 
 class NotesController extends GetxController {
+  final log = Logger("NotesController");
   Rx<List<Note>> notesList = Rx<List<Note>>([]);
   var titleController = TextEditingController();
   var contentController = TextEditingController();
@@ -21,15 +21,15 @@ class NotesController extends GetxController {
 
   @override
   void onClose() {
-    log("The controller has been deleted");
+    log.fine("The controller has been deleted");
   }
 
   bool isNotesListEmpty() {
     if (notesList.value.isEmpty) {
-      log("is Empty!");
+      log.warning("The list notes is Empty!");
       return true;
     } else {
-      log("is not Empty!");
+      log.fine("The list notes is not Empty!");
       return false;
     }
   }
@@ -40,7 +40,7 @@ class NotesController extends GetxController {
       results.length,
       (index) => Note.fromJson(results[index]),
     );
-    log(notes.length.toString());
+    log.info("The length of the notesList ${notes.length.toString()}");
     notesList.value.addAll(notes);
   }
 
@@ -73,7 +73,7 @@ class NotesController extends GetxController {
     updatedNote.title = title;
     updatedNote.content = content;
     updatedNote.modifiedAt = DateTime.now().toString();
-    log(updatedNote.toString());
+    log.info(updatedNote.toString());
 
     await DatabaseHelper.updateNote(updatedNote);
     titleController.text = "";

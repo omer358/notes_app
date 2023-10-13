@@ -8,4 +8,10 @@ class LoginResponseModel {
     accessToken = json['access'];
     refreshToken = json['refresh'];
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "access_token: $accessToken \n refresh_token: $refreshToken";
+  }
 }

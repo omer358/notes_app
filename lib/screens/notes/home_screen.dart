@@ -34,6 +34,7 @@ class NotesPage extends GetWidget<NotesController> {
           IconButton(
               onPressed: () {
                 loginController.logoutUser();
+                Get.delete<NotesController>();
               },
               icon: const Icon(Icons.logout))
         ],
