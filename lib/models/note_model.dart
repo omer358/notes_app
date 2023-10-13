@@ -1,16 +1,17 @@
-class Note {
+import 'package:notes_app/models/new_note_model.dart';
+
+class Note extends NewNote {
   int? id;
-  String title;
-  String content;
   final String? createdDate;
   String modifiedAt;
 
   Note(
       {this.id,
-      required this.title,
-      required this.content,
+      required title,
+      required content,
       this.createdDate,
-      required this.modifiedAt});
+      required this.modifiedAt})
+      : super(title: title, content: content);
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
         id: json['id'],

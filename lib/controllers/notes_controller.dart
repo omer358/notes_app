@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
-import 'package:notes_app/models/new_note.dart';
+import 'package:notes_app/models/new_note_model.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/services/database_helper.dart';
@@ -42,6 +42,9 @@ class NotesController extends GetxController {
       (index) => Note.fromJson(results[index]),
     );
     log.info("The length of the notesList ${notes.length.toString()}");
+    for (var note in notes) {
+      log.info(note.toString());
+    }
     notesList.value.addAll(notes);
   }
 
