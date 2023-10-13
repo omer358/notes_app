@@ -4,7 +4,6 @@ import 'package:logging/logging.dart';
 import 'package:notes_app/models/new_note_model.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
-import 'package:notes_app/services/database_helper.dart';
 import 'package:notes_app/services/rest_apis.dart';
 
 class NotesController extends GetxController {
@@ -67,15 +66,14 @@ class NotesController extends GetxController {
     }
   }
 
-  void updateNote(Note updatedNote) async {
+  void updateNote(NewNote updatedNote) async {
     String title = titleController.text;
     String content = contentController.text;
     updatedNote.title = title;
     updatedNote.content = content;
-    updatedNote.modifiedAt = DateTime.now().toString();
     log.info(updatedNote.toString());
 
-    await DatabaseHelper.updateNote(updatedNote);
+    await restAPI.updateNote(updatedNote);
     titleController.text = "";
     contentController.text = "";
     // getAllNotes();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/style/app_style.dart';
 
@@ -11,11 +12,13 @@ import 'note_editor.dart';
 class NoteViewer extends StatelessWidget {
   NoteViewer({super.key});
 
+  final log = Logger("NoteViewer");
   final noteController = Get.find<NotesController>();
 
   @override
   Widget build(BuildContext context) {
     final Note note = Get.arguments;
+    log.info("Note object ${note.toString()}");
     return Scaffold(
       appBar: AppBar(
         title: Text("note_viewer".tr),

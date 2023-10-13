@@ -38,8 +38,8 @@ class RestAPIs {
   Future<List<dynamic>> fetchAllNotes() async {
     String? TOKEN = Get.find<AuthenticationManager>().getToken();
     Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
-    Response response =
-        await connect.request("$BASE_URL/notes", "GET", headers: authorization);
+    Response response = await connect.request("$BASE_URL/notes/", "GET",
+        headers: authorization);
     if (response.isOk) {
       List<dynamic> data = response.body;
       return data;
@@ -67,12 +67,6 @@ class RestAPIs {
   Future<dynamic> createNewNote(NewNote newNote) async {
     String? TOKEN = Get.find<AuthenticationManager>().getToken();
     Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
-    // //body data
-    // FormData formData = FormData({
-    //   'title': newNote.title,
-    //   'field_name': newNote.content,
-    // });
-
     Response response = await connect.post("$BASE_URL/notes/", newNote.toJson(),
         headers: authorization);
     log.info("add new note response: ${response.statusCode}");
@@ -81,5 +75,13 @@ class RestAPIs {
     } else {
       return null;
     }
+  }
+
+  Future updateNote(NewNote updatedNote) async {
+    String? TOKEN = Get.find<AuthenticationManager>().getToken();
+    Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
+    Response response = await connect.put(
+        "$BASE_URL/notes/${updatedNote.id}/", updatedNote.toJson(),
+        headers: authorization);
   }
 }
