@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
-import 'package:notes_app/core/authentication_manager.dart';
+import 'package:notes_app/controllers/bindings/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
-import 'package:notes_app/services/apis/network_calls.dart';
+import 'package:notes_app/services/rest_apis.dart';
 
 class LoginController extends GetxController {
   final log = Logger("LoginController");
-  final RestAPI apiService = Get.find<RestAPI>();
+  final RestAPIs apiService = Get.find<RestAPIs>();
   late final AuthenticationManager _authManager;
 
   @override

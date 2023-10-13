@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/core/authentication_manager.dart';
+import 'package:notes_app/controllers/bindings/authentication_manager.dart';
 import 'package:notes_app/screens/on_board.dart';
 
 class SplashView extends StatelessWidget {
@@ -45,7 +45,10 @@ class SplashView extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             child: CircularProgressIndicator(),
           ),
-          Text('Loading...'),
+          Text(
+            'Loading...',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          ),
         ],
       ),
     ));

@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:notes_app/core/authentication_manager.dart';
+import 'package:notes_app/controllers/bindings/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 
-class RestAPI {
+class RestAPIs {
   static const String BASE_URL = "http://10.0.2.2:8000";
   final GetConnect connect = Get.find<GetConnect>();
 

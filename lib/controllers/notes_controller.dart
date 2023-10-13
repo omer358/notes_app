@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
-import 'package:notes_app/services/apis/network_calls.dart';
 import 'package:notes_app/services/database_helper.dart';
+import 'package:notes_app/services/rest_apis.dart';
 
 class NotesController extends GetxController {
   final log = Logger("NotesController");
   Rx<List<Note>> notesList = Rx<List<Note>>([]);
   var titleController = TextEditingController();
   var contentController = TextEditingController();
-  RestAPI restAPI = Get.find<RestAPI>();
+  RestAPIs restAPI = Get.find<RestAPIs>();
 
   @override
   void onInit() {

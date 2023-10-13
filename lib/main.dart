@@ -5,7 +5,7 @@ import 'package:logging/logging.dart';
 import 'package:notes_app/screens/routes/app_pages.dart';
 import 'package:notes_app/screens/splash_screen.dart';
 import 'package:notes_app/style/color_schemes.g.dart';
-import 'package:notes_app/translation.dart';
+import 'package:notes_app/utils/translation.dart';
 
 import 'controllers/bindings/notes_bindings.dart';
 
