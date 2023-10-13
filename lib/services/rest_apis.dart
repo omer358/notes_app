@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 import 'package:notes_app/controllers/bindings/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
+import 'package:notes_app/models/new_note.dart';
 
 class RestAPIs {
   final log = Logger("RestAPIs");
@@ -63,14 +64,18 @@ class RestAPIs {
   }
 
   //post request example
-  Future<dynamic> postNewNote() async {
-    //body data
-    FormData formData = FormData({
-      'title': 'field_value',
-      'field_name': 'field_value',
-    });
+  Future<dynamic> createNewNote(NewNote newNote) async {
+    String? TOKEN = Get.find<AuthenticationManager>().getToken();
+    Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
+    // //body data
+    // FormData formData = FormData({
+    //   'title': newNote.title,
+    //   'field_name': newNote.content,
+    // });
 
-    Response response = await connect.post('your_post_api_url', formData);
+    Response response = await connect.post("$BASE_URL/notes/", newNote.toJson(),
+        headers: authorization);
+    log.info("add new note response: ${response.statusCode}");
     if (response.statusCode == 200) {
       return response.body;
     } else {

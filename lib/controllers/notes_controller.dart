@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
+import 'package:notes_app/models/new_note.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/screens/notes/home_screen.dart';
 import 'package:notes_app/services/database_helper.dart';
@@ -51,12 +52,8 @@ class NotesController extends GetxController {
 
   void addNote(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {
-      Note note = Note(
-          title: title,
-          content: content,
-          createdDate: DateTime.now().toString(),
-          modifiedAt: DateTime.now().toString());
-      await DatabaseHelper.addNote(note);
+      NewNote newNote = NewNote(title: title, content: content);
+      await restAPI.createNewNote(newNote);
       titleController.text = "";
       contentController.text = "";
       getAllNotes();
