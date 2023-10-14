@@ -76,36 +76,41 @@ class LoginScreen extends GetWidget<LoginController> {
                     const SizedBox(
                       height: 30,
                     ),
-                    TextField(
-                      controller: _passController,
-                      textInputAction: TextInputAction.done,
-                      obscureText: passwordVisibility,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(passwordVisibility
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                        ),
-                        labelStyle: const TextStyle(
+                    Obx(
+                      () => TextField(
+                        controller: controller.passController,
+                        textInputAction: TextInputAction.done,
+                        obscureText: controller.passwordVisibility.value,
+                        style: const TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                         ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                            width: 1,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.passwordVisibility.value =
+                                  !controller.passwordVisibility.value;
+                            },
+                            icon: controller.passwordVisibility.value
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility),
                           ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                            width: 1,
+                          labelStyle: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              width: 1,
+                            ),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              width: 1,
+                            ),
                           ),
                         ),
                       ),
