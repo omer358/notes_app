@@ -7,10 +7,6 @@ class LoginScreen extends GetWidget<LoginController> {
   LoginScreen({super.key});
 
   final log = Logger("LoginScreen");
-  LoginController _loginController = Get.find<LoginController>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
-  bool passwordVisibility = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +46,7 @@ class LoginScreen extends GetWidget<LoginController> {
                       height: 50,
                     ),
                     TextField(
-                      controller: _emailController,
+                      controller: controller.emailController,
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(
                         fontFamily: 'Poppins',
@@ -119,8 +115,7 @@ class LoginScreen extends GetWidget<LoginController> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        await _loginController.loginUser(
-                            _emailController.text, _passController.text);
+                        await controller.loginUser();
                       },
                       child: const Text("Login"),
                     ),

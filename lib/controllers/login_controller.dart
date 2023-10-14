@@ -9,6 +9,9 @@ class LoginController extends GetxController {
   final log = Logger("LoginController");
   final RestAPIs apiService = Get.find<RestAPIs>();
   late final AuthenticationManager _authManager;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  RxBool passwordVisibility = true.obs;
 
   @override
   void onInit() {
@@ -16,9 +19,11 @@ class LoginController extends GetxController {
     _authManager = Get.find<AuthenticationManager>();
   }
 
-  Future<void> loginUser(String email, String password) async {
-    LoginResponseModel? response = await apiService
-        .fetchLogin(LoginRequestModel(email: email, password: password));
+  Future<void> loginUser() async {
+    LoginResponseModel? response = await apiService.fetchLogin(
+        LoginRequestModel(
+            email: emailController.value.text,
+            password: passController.value.text));
 
     log.info(response.toString());
 
