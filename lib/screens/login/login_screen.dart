@@ -3,14 +3,9 @@ import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 import 'package:notes_app/controllers/login_controller.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends GetWidget<LoginController> {
+  LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final log = Logger("LoginScreen");
   LoginController _loginController = Get.find<LoginController>();
   final TextEditingController _emailController = TextEditingController();
