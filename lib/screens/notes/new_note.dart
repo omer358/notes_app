@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/style/app_style.dart';
 
-import '../controllers/notes_controller.dart';
-import '../models/note_model.dart';
+import '../../controllers/notes_controller.dart';
 
-class NoteEditor extends StatelessWidget {
-  NoteEditor({super.key});
+class CreateNewNote extends StatelessWidget {
+  CreateNewNote({super.key});
   final notesController = Get.find<NotesController>();
+
   @override
   Widget build(BuildContext context) {
-    final Note note = Get.arguments;
-    notesController.titleController.text = note.title;
-    notesController.contentController.text = note.content;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "edit_note".tr,
+          "create_note".tr,
         ),
       ),
       body: Padding(
@@ -56,10 +53,12 @@ class NoteEditor extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
-            notesController.updateNote(note);
+            String title = notesController.titleController.text;
+            String content = notesController.contentController.text;
+            notesController.addNote(title, content);
           },
-          label: Text("save".tr),
-          icon: const Icon(Icons.save)),
+          label: Text("add".tr),
+          icon: const Icon(Icons.add)),
     );
   }
 }
