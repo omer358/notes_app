@@ -13,8 +13,12 @@ mixin CacheManager {
 
   String? getToken() {
     final box = GetStorage();
-    var token = box.read(CacheManagerKey.TOKEN.toString());
-    log.info("Get Token $token");
+    String? token = box.read(CacheManagerKey.TOKEN.toString());
+    if (token == null) {
+      log.info("Token is null!");
+    } else {
+      log.info("Token exists");
+    }
 
     /// the problem is that the token is being called on login page and it's null
     /// I/flutter ( 8712): INFO: 2023-10-13 07:11:49.152530: Get Token null

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:logging/logging.dart';
-import 'package:notes_app/controllers/bindings/authentication_manager.dart';
+import 'package:notes_app/controllers/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 import 'package:notes_app/models/new_note_model.dart';

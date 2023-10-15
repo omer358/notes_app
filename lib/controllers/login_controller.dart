@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
-import 'package:notes_app/controllers/bindings/authentication_manager.dart';
+import 'package:notes_app/controllers/authentication_manager.dart';
+import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 import 'package:notes_app/services/rest_apis.dart';
@@ -26,11 +27,10 @@ class LoginController extends GetxController {
             email: emailController.value.text,
             password: passController.value.text));
 
-    log.info(response.toString());
-
     if (response != null) {
       /// Set isLogin to true
       _authManager.login(response.accessToken);
+      Get.find<NotesController>();
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

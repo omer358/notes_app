@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 import 'package:notes_app/controllers/login_controller.dart';
 import 'package:notes_app/controllers/notes_controller.dart';
-import 'package:notes_app/screens/empty_state_screen.dart';
 import 'package:notes_app/screens/notes/note_viewer_screen.dart';
 
 import '../../widgets/note_card.dart';
@@ -40,68 +39,61 @@ class NotesPage extends GetWidget<NotesController> {
         ],
       ),
       body: Obx(
-            () => controller.isNotesListEmpty()
-            ? const Center(child: EmptyState())
+        () => controller.isLoading.value
+            ? const Loading()
             : Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Obx(
-                () => GridView.builder(
-                gridDelegate:
-                const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                ),
-                itemCount: controller.notesList.value.length,
-                itemBuilder: (context, index) {
-                  log.info(index);
-                        return Dismissible(
-                          key: UniqueKey(),
-                          secondaryBackground: Container(
-                            color: Colors.red,
-                            child: const Center(
-                              child: Icon(Icons.delete_forever),
-                            ),
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                    itemCount: controller.notesList.value.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: UniqueKey(),
+                        secondaryBackground: Container(
+                          color: Colors.red,
+                          child: const Center(
+                            child: Icon(Icons.delete_forever),
                           ),
-                          background: Container(color: Colors.red),
-                    onDismissed: (direction){
-                      controller.deleteNote(controller.notesList.value[index].id);
-                    },
-                    child: NoteCard(
-                      note: controller.notesList.value[index],
-                      onTap: () async {
-                        Get.to(() => NoteViewer(),
-                            arguments: controller.notesList.value[index]);
-                      },
-                      onLongPress: () async {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('delete_msg'.tr),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    controller.deleteNote(
-                                        controller.notesList.value[index]
-                                            .id);
-                                  },
-                                  child: Text('yes'.tr),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: Text('no'.tr),
-                                ),
-                              ],
+                        ),
+                        background: Container(color: Colors.red),
+                        onDismissed: (direction) {
+                          controller
+                              .deleteNote(controller.notesList.value[index].id);
+                        },
+                        child: NoteCard(
+                          note: controller.notesList.value[index],
+                          onTap: () async {
+                            Get.to(() => NoteViewer(),
+                                arguments: controller.notesList.value[index]);
+                          },
+                          onLongPress: () async {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('delete_msg'.tr),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        controller.deleteNote(controller
+                                            .notesList.value[index].id);
+                                      },
+                                      child: Text('yes'.tr),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: Text('no'.tr),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                    ),
-                  );}
-            ),
-          ),
-        ),
+                        ),
+                      );
+                    }),
+              ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
@@ -109,6 +101,28 @@ class NotesPage extends GetWidget<NotesController> {
         },
         label: Text("create".tr),
         icon: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: CircularProgressIndicator(),
+          ),
+          Text(
+            'Loading...',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          ),
+        ],
       ),
     );
   }

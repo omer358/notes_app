@@ -12,11 +12,13 @@ class NotesController extends GetxController {
   var titleController = TextEditingController();
   var contentController = TextEditingController();
   RestAPIs restAPI = Get.find<RestAPIs>();
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() {
     super.onInit();
     getAllNotes();
+    ever(notesList, (callback) => null);
   }
 
   @override
@@ -41,16 +43,9 @@ class NotesController extends GetxController {
       (index) => Note.fromJson(results[index]),
     );
     log.info("The length of the notesList ${notes.length.toString()}");
-    for (var note in notes) {
-      log.info(note.toString());
-    }
     notesList.value.addAll(notes);
+    isLoading.value = false;
   }
-
-  // Future getAllNotes() async {
-  //   notesList.value = await DatabaseHelper.getAllNotes();
-  //   log("the notelist is ready!");
-  // }
 
   void addNote(String title, String content) async {
     if (title.isNotEmpty || content.isNotEmpty) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/controllers/bindings/authentication_manager.dart';
+import 'package:notes_app/controllers/authentication_manager.dart';
 import 'package:notes_app/screens/on_board.dart';
 
 class SplashView extends StatelessWidget {
