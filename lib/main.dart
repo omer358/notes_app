@@ -12,17 +12,20 @@ import 'controllers/bindings/notes_bindings.dart';
 void main(List<String> args) async {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
+    print(
+        '${record.level.name}: ${record.time}: ${record.loggerName}: \t ${record.message}');
   });
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final log = Logger("MyApp");
 
   @override
   Widget build(BuildContext context) {
+    log.info("Main Class");
     return GetMaterialApp(
         title: "My app",
         initialBinding: NotesBindings(),
