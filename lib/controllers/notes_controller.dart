@@ -13,12 +13,12 @@ class NotesController extends GetxController {
   var contentController = TextEditingController();
   RestAPIs restAPI = Get.find<RestAPIs>();
   RxBool isLoading = true.obs;
+  RxBool isEmpty = true.obs;
 
   @override
   void onInit() {
     super.onInit();
     getAllNotes();
-    ever(notesList, (callback) => null);
   }
 
   @override
@@ -26,25 +26,16 @@ class NotesController extends GetxController {
     log.fine("The controller has been deleted");
   }
 
-  bool isNotesListEmpty() {
-    if (notesList.value.isEmpty) {
-      log.warning("The list notes is Empty!");
-      return true;
-    } else {
-      log.fine("The list notes is not Empty!");
-      return false;
-    }
-  }
-
   Future getAllNotes() async {
-    var results = await restAPI.fetchAllNotes();
-    List<Note> notes = List.generate(
-      results.length,
-      (index) => Note.fromJson(results[index]),
-    );
-    log.info("The length of the notesList ${notes.length.toString()}");
-    notesList.value.addAll(notes);
+    notesList.value = await restAPI.fetchAllNotes();
     isLoading.value = false;
+    if (notesList.value.isEmpty) {
+      isEmpty.value = true;
+    } else {
+      isEmpty.value = false;
+      log.info(
+          "The length of the notesList ${notesList.value.length.toString()}");
+    }
   }
 
   void addNote(String title, String content) async {
@@ -77,8 +68,10 @@ class NotesController extends GetxController {
 
   void deleteNote(int? noteId) async {
     log.info(noteId);
+    notesList.value.removeWhere((element) => element.id == Icons.note);
     await restAPI.deleteNote(noteId!);
     getAllNotes();
+    Future.delayed(const Duration(seconds: 1));
     Get.back();
   }
 }

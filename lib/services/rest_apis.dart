@@ -6,6 +6,8 @@ import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 import 'package:notes_app/models/new_note_model.dart';
 
+import '../models/note_model.dart';
+
 class RestAPIs {
   final log = Logger("RestAPIs");
   static const String BASE_URL = "http://10.0.2.2:8000";
@@ -35,14 +37,18 @@ class RestAPIs {
     }
   }
 
-  Future<List<dynamic>> fetchAllNotes() async {
+  Future<List<Note>> fetchAllNotes() async {
     String? TOKEN = Get.find<AuthenticationManager>().getToken();
     Map<String, String> authorization = {"Authorization": "Bearer $TOKEN"};
     Response response = await connect.request("$BASE_URL/notes/", "GET",
         headers: authorization);
     if (response.isOk) {
       List<dynamic> data = response.body;
-      return data;
+      List<Note> notes = List.generate(
+        data.length,
+        (index) => Note.fromJson(data[index]),
+      );
+      return notes;
     } else {
       log.shout("Something went wrong! ${response.statusCode.toString()}");
       return [];
