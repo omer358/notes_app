@@ -46,7 +46,11 @@ class NotesPage extends GetWidget<NotesController> {
                 ? const EmptyState()
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
+                    child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 300,
+                        ),
                         itemCount: controller.notesList.value.length,
                         itemBuilder: (context, index) {
                           return Dismissible(
