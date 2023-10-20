@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 import 'package:notes_app/controllers/login_controller.dart';
+import 'package:notes_app/screens/login/sign_up_screen.dart';
 
 class LoginScreen extends GetWidget<LoginController> {
   LoginScreen({super.key});
@@ -141,7 +142,9 @@ class LoginScreen extends GetWidget<LoginController> {
                           width: 2.5,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(SignUpPage());
+                          },
                           child: const Text(
                             'Sign Up',
                             style: TextStyle(
