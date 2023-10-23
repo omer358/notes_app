@@ -21,11 +21,9 @@ class LoginController extends GetxController {
     _authManager = Get.find<AuthenticationManager>();
   }
 
-  Future<void> loginUser() async {
-    LoginResponseModel? response = await apiService.fetchLogin(
-        LoginRequestModel(
-            username: usernameController.value.text,
-            password: passController.value.text));
+  Future<void> loginUser(username, password) async {
+    LoginResponseModel? response = await apiService
+        .fetchLogin(LoginRequestModel(username: username, password: password));
 
     if (response != null) {
       /// Set isLogin to true
@@ -40,6 +38,17 @@ class LoginController extends GetxController {
             Get.back();
           });
     }
+  }
+
+  Future<void> signUp() async {
+    var response = await apiService.performSignup(SignUpRequest(
+        firstName: firstNameController.value.text,
+        lastName: lastNameController.value.text,
+        email: emailController.value.text,
+        username: usernameController.value.text,
+        password: passwordController.value.text,
+        confirmPassword: confPassController.value.text));
+    if (response != null) {}
   }
 
   void logoutUser() {

@@ -121,7 +121,9 @@ class LoginScreen extends GetWidget<LoginController> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        await controller.loginUser();
+                        await controller.loginUser(
+                            controller.usernameController,
+                            controller.passwordController);
                       },
                       child: const Text("Login"),
                     ),
