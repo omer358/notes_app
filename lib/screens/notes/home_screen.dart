@@ -56,12 +56,12 @@ class NotesPage extends GetWidget<NotesController> {
                           return Dismissible(
                             key: UniqueKey(),
                             secondaryBackground: Container(
-                              color: Colors.red,
+                              color: Colors.white,
                               child: const Center(
                                 child: Icon(Icons.delete_forever),
                               ),
                             ),
-                            background: Container(color: Colors.red),
+                            background: Container(color: Colors.white),
                             onDismissed: (direction) {
                               controller.deleteNote(
                                   controller.notesList.value[index].id);
