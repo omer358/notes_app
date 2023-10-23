@@ -10,7 +10,7 @@ import '../models/note_model.dart';
 
 class RestAPIs {
   final log = Logger("RestAPIs");
-  static const String BASE_URL = "http://10.0.2.2:8000";
+  static const String BASE_URL = "https://4abb-102-120-142-70.ngrok-free.app";
   final GetConnect connect = Get.find<GetConnect>();
 
   //GET request example

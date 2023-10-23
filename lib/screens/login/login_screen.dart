@@ -47,14 +47,14 @@ class LoginScreen extends GetWidget<LoginController> {
                       height: 50,
                     ),
                     TextField(
-                      controller: controller.emailController,
+                      controller: controller.usernameController,
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
                       decoration: const InputDecoration(
-                        labelText: 'Email',
+                        labelText: 'username',
                         labelStyle: TextStyle(
                           fontSize: 15,
                           fontFamily: 'Poppins',

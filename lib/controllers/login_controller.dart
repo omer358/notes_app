@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   final log = Logger("LoginController");
   final RestAPIs apiService = Get.find<RestAPIs>();
   late final AuthenticationManager _authManager;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   RxBool passwordVisibility = true.obs;
 
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
   Future<void> loginUser() async {
     LoginResponseModel? response = await apiService.fetchLogin(
         LoginRequestModel(
-            email: emailController.value.text,
+            username: usernameController.value.text,
             password: passController.value.text));
 
     if (response != null) {
