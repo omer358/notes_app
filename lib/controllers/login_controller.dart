@@ -25,6 +25,7 @@ class LoginController extends GetxController {
   void onInit() {
     super.onInit();
     _authManager = Get.find<AuthenticationManager>();
+    apiService.getDataMethod();
   }
 
   Future<void> loginUser() async {

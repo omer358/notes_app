@@ -21,8 +21,12 @@ class RestAPIs {
       log.finest("200 OK");
       return response.body;
     } else {
-      log.finest("Something went wrong");
-      return null;
+      var results = {
+        "Status code": response.statusCode,
+        "response body": response.body
+      };
+      log.info(results);
+      return results;
     }
   }
 
