@@ -21,9 +21,11 @@ class LoginController extends GetxController {
     _authManager = Get.find<AuthenticationManager>();
   }
 
-  Future<void> loginUser(username, password) async {
-    LoginResponseModel? response = await apiService
-        .fetchLogin(LoginRequestModel(username: username, password: password));
+  Future<void> loginUser() async {
+    LoginResponseModel? response = await apiService.fetchLogin(
+        LoginRequestModel(
+            username: usernameController.value.text,
+            password: passController.value.text));
 
     if (response != null) {
       /// Set isLogin to true
