@@ -5,6 +5,7 @@ import 'package:notes_app/controllers/authentication_manager.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
 import 'package:notes_app/models/new_note_model.dart';
+import 'package:notes_app/models/signup_request.dart';
 
 import '../models/note_model.dart';
 
@@ -89,5 +90,18 @@ class RestAPIs {
     Response response = await connect.put(
         "$BASE_URL/notes/${updatedNote.id}/", updatedNote.toJson(),
         headers: authorization);
+  }
+
+  Future performSignup(SignUpRequest signUpRequest) async {
+    final response =
+        await connect.post("$BASE_URL/register", signUpRequest.toJson());
+
+    if (response.statusCode == HttpStatus.ok) {
+      return LoginResponseModel.fromJson(response.body);
+    } else {
+      log.shout("Something went wrong! ${response.statusCode}");
+      log.shout(response.body);
+      return null;
+    }
   }
 }

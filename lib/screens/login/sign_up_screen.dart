@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
+import 'package:notes_app/controllers/login_controller.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends GetWidget<LoginController> {
   SignUpPage({super.key});
 
   final log = Logger("SignUpScreen");
@@ -43,13 +44,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
+                    TextField(
+                      controller: controller.firstNameController,
                       textInputAction: TextInputAction.next,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'First Name',
                         labelStyle: TextStyle(
                           fontSize: 15,
@@ -73,13 +75,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
+                    TextField(
+                      controller: controller.lastNameController,
                       textInputAction: TextInputAction.next,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Last Name',
                         labelStyle: TextStyle(
                           fontSize: 15,
@@ -103,13 +106,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
+                    TextField(
+                      controller: controller.usernameController,
                       textInputAction: TextInputAction.next,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'username',
                         labelStyle: TextStyle(
                           fontSize: 15,
@@ -133,13 +137,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
+                    TextField(
+                      controller: controller.emailController,
                       textInputAction: TextInputAction.next,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           fontSize: 15,
@@ -163,13 +168,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
-                      textInputAction: TextInputAction.done,
-                      style: TextStyle(
+                    TextField(
+                      controller: controller.passwordController,
+                      textInputAction: TextInputAction.next,
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         labelStyle: TextStyle(
                           fontFamily: 'Poppins',
@@ -192,13 +198,14 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const TextField(
-                      textInputAction: TextInputAction.done,
-                      style: TextStyle(
+                    TextField(
+                      controller: controller.confPassController,
+                      textInputAction: TextInputAction.next,
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Confirm Password',
                         labelStyle: TextStyle(
                           fontFamily: 'Poppins',
@@ -222,7 +229,9 @@ class SignUpPage extends StatelessWidget {
                       height: 25,
                     ),
                     ElevatedButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        controller.signUp();
+                      },
                       child: const Text("Sign Up"),
                     ),
                     const SizedBox(
