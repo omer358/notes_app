@@ -5,6 +5,7 @@ import 'package:notes_app/controllers/authentication_manager.dart';
 import 'package:notes_app/controllers/notes_controller.dart';
 import 'package:notes_app/models/login_request_model.dart';
 import 'package:notes_app/models/login_response_model.dart';
+import 'package:notes_app/models/signup_request.dart';
 import 'package:notes_app/services/rest_apis.dart';
 
 class LoginController extends GetxController {
@@ -13,6 +14,11 @@ class LoginController extends GetxController {
   late final AuthenticationManager _authManager;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confPassController = TextEditingController();
   RxBool passwordVisibility = true.obs;
 
   @override
@@ -43,14 +49,19 @@ class LoginController extends GetxController {
   }
 
   Future<void> signUp() async {
-    var response = await apiService.performSignup(SignUpRequest(
+    LoginResponseModel? response = await apiService.performSignup(SignUpRequest(
         firstName: firstNameController.value.text,
         lastName: lastNameController.value.text,
         email: emailController.value.text,
         username: usernameController.value.text,
         password: passwordController.value.text,
         confirmPassword: confPassController.value.text));
-    if (response != null) {}
+    if (response != null) {
+      /// Set isLogin to true
+      _authManager.login(response.accessToken);
+      Get.find<NotesController>();
+      Get.back();
+    }
   }
 
   void logoutUser() {
