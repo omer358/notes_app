@@ -21,6 +21,7 @@ class SignUpRequest {
     data['email'] = email;
     data['username'] = username;
     data['password'] = password;
+    data['confirm_password'] = confirmPassword;
     return data;
   }
 }
