@@ -33,6 +33,7 @@ class LoginController extends GetxController {
         LoginRequestModel(
             username: usernameController.value.text,
             password: passController.value.text));
+    clearControllers();
 
     if (response != null) {
       /// Set isLogin to true
@@ -57,6 +58,7 @@ class LoginController extends GetxController {
         username: usernameController.value.text,
         password: passwordController.value.text,
         confirmPassword: confPassController.value.text));
+    clearControllers();
     if (response != null) {
       /// Set isLogin to true
       _authManager.login(response.accessToken);
@@ -67,6 +69,15 @@ class LoginController extends GetxController {
 
   void logoutUser() {
     _authManager.logOut();
+  }
+
+  void clearControllers() {
+    usernameController.clear();
+    passController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    confPassController.clear();
   }
 //
 // Future<void> registerUser(String email, String password) async {

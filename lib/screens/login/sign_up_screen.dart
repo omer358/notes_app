@@ -47,6 +47,7 @@ class SignUpPage extends GetWidget<LoginController> {
                     TextField(
                       controller: controller.firstNameController,
                       textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.words,
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
@@ -78,6 +79,7 @@ class SignUpPage extends GetWidget<LoginController> {
                     TextField(
                       controller: controller.lastNameController,
                       textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.words,
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
