@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,8 +9,12 @@ import 'package:notes_app/style/color_schemes.g.dart';
 import 'package:notes_app/utils/translation.dart';
 
 import 'controllers/bindings/notes_bindings.dart';
+import 'firebase_options.dart';
 
 void main(List<String> args) async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     print(
